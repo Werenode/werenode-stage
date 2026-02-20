@@ -369,6 +369,38 @@ function TankGame() {
   }, []);
 
   useEffect(() => {
+    // 1. On définit les fonctions
+    const onDown = e => {
+      keysRef.current[e.key] = true;
+      if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter', ' '].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+  
+    const onUp = e => { 
+      // Au lieu de delete, on passe à false pour plus de stabilité
+      keysRef.current[e.key] = false; 
+    };
+  
+    const onBlur = () => {
+      // ÉTAPE CRUCIALE : Si on quitte la fenêtre, on stoppe tout (évite le char fou)
+      keysRef.current = {}; 
+    };
+  
+    // 2. On écoute
+    window.addEventListener('keydown', onDown);
+    window.addEventListener('keyup', onUp);
+    window.addEventListener('blur', onBlur); // Sécurité supplémentaire
+  
+    // 3. On nettoie
+    return () => { 
+      window.removeEventListener('keydown', onDown); 
+      window.removeEventListener('keyup', onUp);
+      window.removeEventListener('blur', onBlur);
+    };
+  }, []);
+  
+  /* useEffect(() => {
     const onDown = e => {
       keysRef.current[e.key] = true;
       if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter'].includes(e.key)) e.preventDefault();
@@ -378,6 +410,7 @@ function TankGame() {
     window.addEventListener('keyup',   onUp);
     return () => { window.removeEventListener('keydown',onDown); window.removeEventListener('keyup',onUp); };
   }, []);
+  */
 
   useEffect(() => {
     animRef.current = requestAnimationFrame(tick);
