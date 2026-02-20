@@ -367,42 +367,6 @@ function TankGame() {
     setPhase('playing');
     setWinner(null);
   }, []);
-
-  useEffect(() => {
-    // On s'assure que l'objet est bien vide au départ
-    keysRef.current = {};
-  
-    const onDown = (e) => {
-      // On stocke l'état "enfoncé"
-      keysRef.current[e.key] = true;
-  
-      // Empêche le défilement de la page avec les flèches
-      if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter',' '].includes(e.key)) {
-        e.preventDefault();
-      }
-    };
-  
-    const onUp = (e) => {
-      // Au lieu de delete, on passe explicitement à false
-      keysRef.current[e.key] = false;
-    };
-  
-    const onBlur = () => {
-      // Si l'utilisateur change d'onglet ou clique ailleurs, 
-      // on force toutes les touches à "relâchées" pour éviter le char fou
-      keysRef.current = {};
-    };
-  
-    window.addEventListener('keydown', onDown);
-    window.addEventListener('keyup', onUp);
-    window.addEventListener('blur', onBlur);
-  
-    return () => {
-      window.removeEventListener('keydown', onDown);
-      window.removeEventListener('keyup', onUp);
-      window.removeEventListener('blur', onBlur);
-    };
-  }, []);
   
   /* useEffect(() => {
     // 1. On définit les fonctions
@@ -436,7 +400,7 @@ function TankGame() {
     };
   }, []);  */
   
-  /* useEffect(() => {
+  useEffect(() => {
     const onDown = e => {
       keysRef.current[e.key] = true;
       if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter'].includes(e.key)) e.preventDefault();
@@ -446,7 +410,6 @@ function TankGame() {
     window.addEventListener('keyup',   onUp);
     return () => { window.removeEventListener('keydown',onDown); window.removeEventListener('keyup',onUp); };
   }, []);
-  */
 
   useEffect(() => {
     animRef.current = requestAnimationFrame(tick);
