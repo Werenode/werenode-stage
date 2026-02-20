@@ -9,7 +9,7 @@ const GameIcon   = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="n
 // ═══════════════════════════════════════════════════════════════════════════════
 // CONSTANTES DU JEU
 // ═══════════════════════════════════════════════════════════════════════════════
-const GW = 900, GH = 500;
+const GW = 1200, GH = 800;
 const BULLET_SPEED = 7;
 const TANK_SPEED   = 3;
 const MAX_BULLETS  = 5;
