@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["master"] # Vérifie si ta branche s'appelle master ou main
+    branches: ["main"] # Vérifie si ta branche s'appelle master ou main
   workflow_dispatch:
 
 permissions:
@@ -40,3 +40,4 @@ jobs:
         id: deployment
 
         uses: actions/deploy-pages@v4
+
